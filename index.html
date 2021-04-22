@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>MarkDown Editor!</title>
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <link href="./resources/css/codicon.css" rel="stylesheet">
+        <link href="./resources/css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="titlebar">
+            <div class="icon"><img src="./resources/favicon.ico" alt="" /></div>
+            <ul class="menubar">
+                <li class="menuitem visiable">
+                    <span>File</span>
+                    <ul class="submenu">
+                        <li onclick="handleNew()"><span>New File</span><span>Ctrl+N</span></li>
+                        <li onclick="handleOpenFile()"><span>Open File</span><span>Ctrl+O</span></li>
+                        <li onclick="handleOpenFolder()"><span>Open Folder</span><span>Ctrl+K</span></li>
+                        <li onclick="handleSave()"><span>Save</span><span>Ctrl+S</span></li>
+                        <li onclick="handleSaveAs()"><span>Save As</span><span>Ctrl+Shift+S</span></li>
+                        <li onclick="handleQuit()"><span>Quit</span><span>Alt+Q</span></li>
+                        <li onclick="handleSettings()"><span>Settings</span></li>
+                    </ul>
+                </li>
+                <li class="menuitem visiable">
+                    <span>Edit</span> 
+                    <ul class="submenu">
+                        <li><span>Undo</span><span>Ctrl+Z</span></li>
+                        <li><span>Redo</span><span>Ctrl+Shift+Z</span></li>
+                        <hr/>
+                        <li><span>Cut</span><span>Ctrl+X</span></li>
+                        <li><span>Copy</span><span>Ctrl+C</span></li>
+                        <li><span>Paste</span><span>Ctrl+P</span></li>
+                        <li><span>Select All</span><span>Ctrl+A</span></li>
+                        <!--
+                        <hr />
+                        <li><span>Search</span><span>Ctrl+F</span></li>
+                        <li><span>Replace</span><span>Ctrl+Shift+F</span></li>
+                        -->
+                    </ul>
+                </li>
+                <li class="menuitem visiable">
+                    <span>View</span>
+                    <ul class="submenu">
+                        <li onclick="handleReload()"><span>Reload</span><span>F5</span></li>
+                        <li onclick="handleFullScreen()"><span>Full Screen</span><span>F11</span></li>
+                    </ul>
+                </li>
+                <li class="menuitem visiable">
+                    <span>Help</span>
+                    <ul class="submenu">
+                        <li><span>Documentation</span><span>F6</span></li>
+                        <li onclick="handleDevTools()"><span>Dev Tools</span><span>F12</span></li>
+                        <li onclick="handleAbout()"><span>About</span></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="window-title" id="title"></div>
+            <div class="window-controls">
+                <div class="window-icon window-minimize codicon codicon-chrome-minimize" onclick="handleMinimize()"></div>
+                <div class="window-icon window-maxmize codicon codicon-chrome-restore" onclick="handleMaxmize()"></div>
+                <div class="window-icon window-close codicon codicon-chrome-close" onclick="handleQuit()"></div>
+            </div>
+        </div>
+        <main class="container">
+            <div class="folder-container">
+                <div class="files-list" id="files-container">
+                    <button class="folder-button" onclick="handleOpenFolder()">打开文件夹</button>
+                    <!--
+                    <span class="file-item dir icon-dir">Documentation</span>
+                    <ul class="">
+                        <li class="file-item sub-item icon-dir">Document</li>
+                        <li class="file-item sub-item icon-file active" file-target="" onclick="handleOpenFile('path')">Readme.md</li>
+                    </ul>
+                    -->
+                </div>
+                
+            </div>
+            <div class="right-container">
+                <div class="label-bar">
+                    <div class="button-group">
+                        <button class="btn btn-active" onclick="handlePreviewMode(this)" title="Alt+P" id="btn-preview">预览模式</button>
+                        <button class="btn" onclick="handleEditMode(this)" title="Alt+E" id="btn-edit">书写模式</button>
+                        <button class="btn" onclick="handleReadMode(this)" title="Alt+R" id="btn-read">阅读模式</button>
+                    </div>
+                    <div id="modal" title="Markdown语法提示"><span class="modal-info codicon codicon-info"></span></div>
+                </div>
+                <div class="editor-container">
+                    <div class="inner-container" id="editor">
+                        <textarea id="md_editor" name="" cols="30" rows="10" oninput="parseMarkdown()"></textarea>
+                    </div>
+                    <div class="inner-container" id="preview">
+                        <div></div>
+                    </div>
+
+                </div>
+                
+            </div>
+            <div class="overlay hidden">
+                <div class="modal"></div>
+            </div>
+        </main>
+        <footer class="statusbar" id="status">
+            <p>tips on status bar</p>
+        </footer>
+        
+
+    </body>
+    <script src="./scripts/markdown.js"></script>
+    <script src="./scripts/shortcut.js"></script>
+    <script src="./scripts/render.js"></script>
+    
+</html>
+
